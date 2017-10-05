@@ -10,4 +10,5 @@
   {% if user.is_desocupado() %}
     <p>DNI: {{ user.profile().dni }}</p>
   {% endif %}
+  <p>Para borrar tu cuenta, haga click <a href="{{ url('borrar_cuenta') }}">aqui</a></p>
 {% endblock %}

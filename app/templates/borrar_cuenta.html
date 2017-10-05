@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Nuevo usuario</h1>
+<h1>Borrar cuenta</h1>
 <p>
+
+{{ user.get_full_name() }}
 {% if form.errors %}
     {% for field in form %}
         {% for error in field.errors %}
