@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^registrar/empresa$', core_views.registro_empresa, name='registrar.empresa'),
     url(r'^borrar_cuenta', core_views.borrar_cuenta, name='borrar_cuenta'),
     url(r'^registro_split', core_views.registro_split, name='registro_split'),
+    url(r'^editar', core_views.editar, name='editar'),
 ]

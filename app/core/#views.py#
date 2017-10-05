@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from app.core.forms import RegistroDesocupado, RegistroEmpresa, BorrarCuenta
 
@@ -94,19 +94,16 @@ def handle_borrar_cuenta_form(request):
     else:
         return render(request, 'borrar_cuenta.html', {'form': form})
 
-def editar(request):
-    form_class = RegistroDesocupado    
-    form = form_class(request.POST or None)
+def edit_names(request, template_name="registration/edit_names.html"):
     if request.method == "POST":
-        RegistroDesocupado(data=request.POST, instance=request.user)
-    if form.is_valid():
-        user = form.save(commit=False)
-        user.save()
-        url = urlresolvers.reverse('login')
-        return HttpResponseRedirect(url)
+        form = UserForm(data=request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+            url = urlresolvers.reverse('my_account')
+            return HttpResponseRedirect(url)
     else:
-        form = RegistroDesocupado(instance=request.user)
-    page_title = ('Editar datos')
-    return render(request, 'editar.html', {'form': form}
-
-)
+        form = UserForm(instance=request.user)
+    page_title = _('Edit user names')
+    return render_to_response(template_name, locals(),
+        context_instance=RequestContext(request))
