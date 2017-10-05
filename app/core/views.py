@@ -6,8 +6,8 @@ from django.shortcuts import render, redirect
 
 from app.core.forms import RegistroDesocupado, RegistroEmpresa
 
-def test(request):
-    return render(request, 'test.html')
+def registro_split(request):
+    return render(request, 'registro_split.html')
 
 @login_required
 def home(request):

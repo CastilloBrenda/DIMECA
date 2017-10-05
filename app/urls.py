@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^$', core_views.home, name='home'),
     url(r'^registrar/desocupado$', core_views.registro_desocupado, name='registrar.desocupado'),
     url(r'^registrar/empresa$', core_views.registro_empresa, name='registrar.empresa'),
-    url(r'^test', core_views.test, name='test'),
+    url(r'^registro_split', core_views.registro_split, name='registro_split'),
 ]
