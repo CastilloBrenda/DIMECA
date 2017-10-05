@@ -1,0 +1,65 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+  <div class="center-container">
+    <div class="center-row">
+	<div class="feature col-xs-6 bg-one text-center"><a href="{{ url('registrar.desocupado') }}"><h2>Desocupado</h2></a></div>
+    <div class="feature col-xs-6 bg-two text-center"><a href="{{ url('registrar.empresa') }}"><h2>Empresa</h2></a></div>
+    </div>
+</div>
+
+<style type="text/css">
+
+ div.feature {
+        position: relative;
+    }
+
+    div.feature a {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        text-decoration: none; /* No underlines on the link */
+        z-index: 10; /* Places the link above everything else in the div */
+        background-color: #FFF; /* Fix to make div clickable in IE */
+        opacity: 0; /* Fix to make div clickable in IE */
+        filter: alpha(opacity=1); /* Fix to make div clickable in IE */
+    }
+
+html,
+body {
+  height: 100%;
+}
+
+.center-container {
+  height:100%;
+  display: table;
+  width:100%;
+  margin:0;
+}
+
+.center-row {
+  height:50%;
+  width:100%;
+  display: table-row;
+}
+  
+.center-row > div {
+  height:100%;
+  width:50%;
+  display: table-cell;
+  border:0 solid #eee;
+  color:#fff;
+  vertical-align:middle;
+}
+
+.bg-one {
+  background:#efefef url(' {{ static('images/desocupado.jpg') }} ');
+}
+.bg-two {
+  background:#efefef url(' {{ static('images/empresa.jpg') }} ');
+}
+</style>
+
+{% endblock %}
