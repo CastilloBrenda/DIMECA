@@ -3,6 +3,7 @@
 {% block content %}
 <h1>Modificar su cuenta</h1>
 <p>
+
 {% if form.errors %}
     {% for field in form %}
         {% for error in field.errors %}
@@ -21,7 +22,7 @@
 <form method="POST" class="post-form">
     {{ csrf_input }}
     {{ form.as_p() }}
-    <button type="submit" class="save btn btn-default">Ingresar</button>
+    <button type="submit" class="save btn btn-default">Listo</button>
 </form>
 <p><p>
 {% endblock %}
