@@ -94,6 +94,24 @@ def handle_borrar_cuenta_form(request):
     else:
         return render(request, 'borrar_cuenta.html', {'form': form})
 
+def modificar_cuenta(request):
+	if request.method == 'GET':
+		return get_modificar_cuenta_form(request)
+	elif request.method == 'POST':
+		return handle_modificar_cuenta(request)	 
+
+def get_modificar_cuenta_form (request):
+    form = ModificarCuenta()
+    return render(request, 'signup.html', {'form': form})
+
+def handle_modificar_cuenta_form(request):
+    form = ModificarCuenta(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('login')
+    else:
+        return render(request, 'signup.html', {'form': form})
+
 def editar(request):
     form_class = RegistroDesocupado    
     form = form_class(request.POST or None)
