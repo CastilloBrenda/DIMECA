@@ -71,3 +71,5 @@ def update_user_empresa(sender, instance, created, **kwargs):
 class OfertaLaboral(models.Model):
     # empresa_oferta = models.ForeignKey(Empresa)
     tipo_de_trabajo = models.CharField(max_length=50)
+    publicacion = models.TextField(null=True)
+    fecha_publicacion = models.DateField(null=True)

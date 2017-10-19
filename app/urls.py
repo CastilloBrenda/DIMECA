@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^registro_split', core_views.registro_split, name='registro_split'),
     url(r'^editar', core_views.editar, name='editar'),
     url(r'^modificar_cuenta', core_views.modificar_cuenta, name='modificar_cuenta'),
+    url(r'^ofertas', core_views.ofertas, name='ofertas'),
 ]

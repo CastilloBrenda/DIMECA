@@ -1,9 +1,9 @@
 from django.shortcuts import render
-
+from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, render_to_response
-from django.contrib.auth.models import User
+from django.contrib.auth.models import *
 from app.core.forms import *
 
 def registro_split(request):
@@ -68,6 +68,27 @@ def handle_registro_empresa_form(request):
     else:
         return render(request, 'signup.html', {'form': form})
 
+def ofertas(request):
+    ofertas = OfertaLaboral.objects.all()
+    return render(request, 'ofertas.html', {'ofertas': ofertas})
+
+def registro_oferta(request):
+    if request.method == "GET":
+        return get_registro_oferta_form(request)
+    elif request.method == "POST":
+        return handle_registro_oferta_form(request)
+
+def get_registro_oferta(request):
+    form = RegistroOferta()
+    return render(request, 'registro_oferta.html', {'form': form})
+                  
+def handle_registro_oferta(request):
+    form = RegistroOferta(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('ofertas')
+    else:
+        return render(request, 'registro_oferta.html', {'form': form})
 
 def borrar_cuenta(request):
     if request.method == 'GET':

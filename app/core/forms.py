@@ -84,5 +84,14 @@ class RegistroEmpresa(UserCreationForm):
         # Y lo devolvemos
         return user
 
+class RegistroOferta(forms.Form):
+    tipo_de_trabajo = forms.CharField(max_length=50)
+    publicacion = forms.CharField(widget=forms.Textarea, max_length=700, required=False)
+    fecha_publicacion = forms.DateField()
+
+    class Meta:
+        model = OfertaLaboral
+
+    
 class BorrarCuenta(forms.Form):
     estas_seguro = forms.BooleanField()

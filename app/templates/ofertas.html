@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for oferta in ofertas %}
+<div>
+  <p>publicado: {{ oferta.fecha_publicacion }}</p>
+  <h2>{{ oferta.tipo_de_trabajo }}</h2>
+  <p>{{ oferta.publicacion }}</p>
+</div>
+{% endfor %}
+
+{% endblock %}
