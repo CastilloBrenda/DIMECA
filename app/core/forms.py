@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from app.core.models import OfertaLaboral
 
 class RegistroDesocupado(UserCreationForm):
     dni = forms.CharField(required=True)

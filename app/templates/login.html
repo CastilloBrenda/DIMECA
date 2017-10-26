@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  <head>
+       <link rel="stylesheet" href="{{ static('css/style.css') }}">
+  </head>
   <h2>Ingresa a nuestro sitio</h2>
   {% if form.errors %}
     <p style="color: red">Your username and password didn't match. Please try again.</p>
