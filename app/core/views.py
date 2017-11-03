@@ -5,17 +5,9 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth.models import *
 from app.core.forms import *
-from jinja2 import Environment
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse
-
-def environment(**options):
-    env = Environment(**options)
-    env.globals.update({
-       'static': staticfiles_storage.url,
-       'url': reverse,
-    })
-    return env
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 def registro_split(request):
     return render(request, 'registro_split.html')

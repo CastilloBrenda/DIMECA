@@ -3,8 +3,8 @@
 {% block content %}
   <div class="center-container">
     <div class="center-row">
-	<div class="feature col-xs-6 bg-one text-center"><a href="{{ url('registrar.desocupado') }}"><h2>Desocupado</h2></a></div>
-    <div class="feature col-xs-6 bg-two text-center"><a href="{{ url('registrar.empresa') }}"><h2>Empresa</h2></a></div>
+	<div class="feature col-xs-6 bg-one text-center"><a href="{% url 'registrar.desocupado' %}"><h2>Desocupado</h2></a></div>
+    <div class="feature col-xs-6 bg-two text-center"><a href="{% url 'registrar.empresa' %}"><h2>Empresa</h2></a></div>
     </div>
 </div>
 
@@ -51,10 +51,10 @@ body {
 }
 
 .bg-one {
-  background:#efefef url(' {{ static('images/desocupado.jpg') }} ');
+  background:#efefef {% url {% static 'images/desocupado.jpg' %} %};
 }
 .bg-two {
-  background:#efefef url(' {{ static('images/empresa.jpg') }} ');
+  background:#efefef {% url {% static 'images/empresa.jpg' %} %};
 }
 </style>
 
