@@ -6,7 +6,7 @@
   {% endif %}
     <div style="width:30%">
       <form method="post">
-        {{ csrf_input }}
+        {{ csrf_token }}
         <input type="hidden" name="next" value="{{ next }}" />
         {% for field in form %}
         <div class="form-group has-errors text-danger small">
@@ -23,7 +23,7 @@
         {% endfor %}
         <button type="submit">Ingresar</button>
         <p><p>
-        <a href="{{ url('registro_split') }}">Nuevo? Registrate.</a>
+        <a href="{% url 'registro_split' %}">Nuevo? Registrate.</a>
     </div>
     </form>
 {% endblock %}

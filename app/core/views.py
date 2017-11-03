@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, render_to_response
@@ -7,7 +6,7 @@ from django.contrib.auth.models import *
 from app.core.forms import *
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse
-from django.views.decorators.csrf import ensure_csrf_cookie
+from .models import *
 
 def registro_split(request):
     return render(request, 'registro_split.html')

@@ -1,10 +1,10 @@
-f3-{% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <h1>Borrar cuenta</h1>
 <p>
 
-{{ user.get_full_name() }}
+{{ user.get_full_name }}
 {% if form.errors %}
     {% for field in form %}
         {% for error in field.errors %}
@@ -21,7 +21,7 @@ f3-{% extends 'base.html' %}
 {% endif %}
 
 <form method="POST" class="post-form">
-    {{ csrf_input }}
+    {{ csrf_token }}
     {{ form.as_p() }}
     <button type="submit" class="save btn btn-default">Ingresar</button>
 </form>
