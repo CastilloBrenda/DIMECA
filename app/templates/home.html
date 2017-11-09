@@ -10,6 +10,13 @@
   {% if user.is_desocupado %}
     <p>DNI: {{ user.profile.dni }}</p>
   {% endif %}
+  {% url 'modificar_desocupado' as mod_des %}
+  {% url 'modificar_empresa' as mod_emp %}
   <p>Para borrar tu cuenta, haga click <a href="{% url 'borrar_cuenta' %}">aqui</a></p>
-  <p>Para modificar tu cuenta, haga click <a href="{% url 'modificar_cuenta' %}">aqui</a></p>
+  <p>Para modificar tu cuenta, haga click <a href="{% if user.profile_type == "desocupado" %}
+                                                    {{ mod_des }}
+                                                   {% elif user.profile_type == "empresa" %}
+                                                    {{ mod_emp }}
+                                                   {% endif %}
+    ">aqui</a></p>
 {% endblock %}

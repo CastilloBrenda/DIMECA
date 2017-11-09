@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^registrar/empresa$', core_views.registro_empresa, name='registrar.empresa'),
     url(r'^borrar_cuenta', core_views.borrar_cuenta, name='borrar_cuenta'),
     url(r'^registro_split', core_views.registro_split, name='registro_split'),
-    url(r'^editar', core_views.editar, name='editar'),
-    url(r'^modificar_cuenta', core_views.modificar_cuenta, name='modificar_cuenta'),
+    url(r'^modificar_desocupado', core_views.modificar_desocupado, name='modificar_desocupado'),
+    url(r'^modificar_empresa', core_views.modificar_empresa, name='modificar_empresa'),
     url(r'^ofertas', core_views.ofertas, name='ofertas'),
 ]

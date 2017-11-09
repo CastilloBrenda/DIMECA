@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from app.core.models import OfertaLaboral
+from django.http import HttpResponseRedirect
+
 
 class RegistroDesocupado(UserCreationForm):
     dni = forms.CharField(required=True)
@@ -41,22 +43,35 @@ class RegistroDesocupado(UserCreationForm):
         # Y lo devolvemos
         return user
 
-class ModificarCuenta(UserCreationForm):
-    cuit = forms.CharField(max_length=10)
-    razon_social = forms.CharField()
-    rubro = forms.CharField()
+class ModificarDesocupado(forms.ModelForm):
+    dni = forms.CharField(required=True)
+    fecha_nacimiento = forms.DateField(required=True)
+    profesion = forms.CharField(max_length=200, required=False)
+    experiencia_laboral = forms.CharField(widget=forms.Textarea, max_length=700, required=False)
+    formacion = forms.CharField(widget=forms.Textarea, max_length=500, required=False)
+    habilidades = forms.CharField(widget=forms.Textarea, max_length=500, required=False)
+    trabajo_realizable = forms.CharField(max_length=500, required=False)
+    localidad = forms.CharField(max_length=500, required=False)
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'first_name', 'last_name', 'dni', 'fecha_nacimiento', 'profesion', 'experiencia_laboral', 'formacion', 'habilidades', 'trabajo_realizable', 'localidad')
 
-    def save(self):
-        user = super(ModificarCuenta, self).save()
-        user.refresh_from_db()
-        user.empresa.cuit = self.cleaned_data.get('cuit')
-        user.empresa.razon_social = self.cleaned_data.get('razon_social')
-        user.empresa.rubro = self.cleaned_data.get('rubro')
-        user.save()
+    def clean_email(self):
+        username = self.cleaned_data.get('username')
+        email = self.cleaned_data.get('email')
+
+        if email and User.objects.filter(email=email).exclude(username=username).count():
+            raise forms.ValidationError('This email address is already in use. Please supply a different email address.')
+        return email
+
+    def save(self, commit=True):
+        user = super(ModificarDesocupado, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+
+        if commit:
+            user.save()
+
         return user
 
 class RegistroEmpresa(UserCreationForm):
@@ -83,6 +98,32 @@ class RegistroEmpresa(UserCreationForm):
         # Finalmente, guardamos el usuario con la empresa ya completo
         user.save()
         # Y lo devolvemos
+        return user
+
+class ModificarEmpresa(forms.ModelForm):
+    cuit = forms.CharField(max_length=10)
+    razon_social = forms.CharField()
+    rubro = forms.CharField()
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name', 'cuit', 'razon_social', 'rubro')
+
+    def clean_email(self):
+        username = self.cleaned_data.get('username')
+        email = self.cleaned_data.get('email')
+
+        if email and User.objects.filter(email=email).exclude(username=username).count():
+            raise forms.ValidationError('This email address is already in use. Please supply a different email address.')
+        return email
+
+    def save(self, commit=True):
+        user = super(ModificarEmpresa, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+
+        if commit:
+            user.save()
+
         return user
 
 class RegistroOferta(forms.Form):

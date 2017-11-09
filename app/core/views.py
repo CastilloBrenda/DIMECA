@@ -118,37 +118,32 @@ def handle_borrar_cuenta_form(request):
     else:
         return render(request, 'borrar_cuenta.html', {'form': form})
 
-def modificar_cuenta(request):
-	if request.method == 'GET':
-		return get_modificar_cuenta_form(request)
-	elif request.method == 'POST':
-		return handle_modificar_cuenta_form(request)	 
+def modificar_desocupado(request):
+    args = {}
 
-def get_modificar_cuenta_form (request):
-    form = ModificarCuenta()
-    return render(request, 'modificar_cuenta.html', {'form': form})
-
-def handle_modificar_cuenta_form(request):
-    form = ModificarCuenta(request.POST)
-    if form.is_valid():
-        form.save()
-        return redirect('home')
+    if request.method == 'POST':
+        form = ModificarDesocupado(request.POST, instance=request.user)
+        form.actual_user = request.user
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('home'))
     else:
-        return render(request, 'modificar_cuenta.html', {'form': form})
+        form = ModificarDesocupado()
 
-def editar(request):
-    form_class = RegistroDesocupado    
-    form = form_class(request.POST or None)
-    if request.method == "POST":
-        RegistroDesocupado(data=request.POST, instance=request.user)
-    if form.is_valid():
-        user = form.save(commit=False)
-        user.save()
-        url = urlresolvers.reverse('login')
-        return HttpResponseRedirect(url)
+    args['form'] = form
+    return render(request, 'modificar_cuenta.html', args)
+
+def modificar_empresa(request):
+    args = {}
+
+    if request.method == 'POST':
+        form = ModificarEmpresa(request.POST, instance=request.user)
+        form.actual_user = request.user
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('home'))
     else:
-        form = RegistroDesocupado(instance=request.user)
-    page_title = ('Editar datos')
-    return render(request, 'editar.html', {'form': form}
+        form = ModificarEmpresa()
 
-)
+    args['form'] = form
+    return render(request, 'modificar_cuenta.html', args)
