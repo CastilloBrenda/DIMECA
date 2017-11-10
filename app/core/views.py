@@ -74,23 +74,23 @@ def ofertas(request):
     ofertas = OfertaLaboral.objects.all()
     return render(request, 'ofertas.html', {'ofertas': ofertas})
 
-def registro_oferta(request):
+def crear_oferta(request):
     if request.method == "GET":
-        return get_registro_oferta_form(request)
+        return get_crear_oferta_form(request)
     elif request.method == "POST":
-        return handle_registro_oferta_form(request)
+        return handle_crear_oferta_form(request)
 
-def get_registro_oferta(request):
+def get_crear_oferta_form(request):
     form = RegistroOferta()
-    return render(request, 'registro_oferta.html', {'form': form})
+    return render(request, 'crear_oferta.html', {'form': form})
                   
-def handle_registro_oferta(request):
+def handle_crear_oferta_form(request):
     form = RegistroOferta(request.POST)
     if form.is_valid():
         form.save()
         return redirect('ofertas')
     else:
-        return render(request, 'registro_oferta.html', {'form': form})
+        return render(request, 'crear_oferta.html', {'form': form})
 
 def borrar_cuenta(request):
     if request.method == 'GET':

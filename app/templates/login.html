@@ -5,11 +5,14 @@
   <head>
        <link rel="stylesheet" href="{% static 'css/style.css' %}">
   </head>
-  <h2>Ingresa a nuestro sitio</h2>
+
+  <div class="container">
+    <div class="login-container">
+              <div id="output"></div>
+              <div class="form-box">
   {% if form.errors %}
     <p style="color: red">Your username and password didn't match. Please try again.</p>
   {% endif %}
-    <div style="width:30%">
       <form method="post">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}" />
@@ -26,9 +29,14 @@
             {% endif %}
           </p>
         {% endfor %}
-        <button type="submit">Ingresar</button>
+        <button class="btn btn-info btn-block login" type="submit">Ingresar</button>
         <p><p>
         <a href="{% url 'registro_split' %}">Nuevo? Registrate.</a>
     </div>
     </form>
+
+  </div>
+</div>
+
+</div>
 {% endblock %}

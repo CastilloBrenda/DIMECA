@@ -4,9 +4,11 @@
 
 {% for oferta in ofertas %}
 <div>
-  <p>publicado: {{ oferta.fecha_publicacion }}</p>
-  <h2>{{ oferta.tipo_de_trabajo }}</h2>
-  <p>{{ oferta.publicacion }}</p>
+  <h2>Oferta:</h2>
+  <p>Posicion: {{ oferta.posicion }}</p>
+  <p>Descripcion: {{ oferta.descripcion }}</p>
+  <p>Carga horaria: {{ oferta.carga_horaria }}</p>
+  <p>Profesion: {{ oferta.profesion }}</p>
 </div>
 {% endfor %}
 

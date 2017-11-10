@@ -4,7 +4,26 @@ from django.contrib.auth.models import User
 from app.core.models import OfertaLaboral
 from django.http import HttpResponseRedirect
 
+class RegistroOferta(forms.ModelForm):
+    posicion = forms.CharField(required=True)
+    descripcion = forms.CharField(widget=forms.Textarea, max_length=500, required=True)
+    carga_horaria = forms.DurationField(required=True)
+    profesion = forms.CharField(required=True)
 
+    class Meta:
+        model = OfertaLaboral
+        fields = ('posicion', 'descripcion', 'carga_horaria', 'profesion')
+
+    def save(self):
+        oferta = super(RegistroOferta, self).save()
+        oferta.refresh_from_db()
+        oferta.posicion = self.cleaned_data.get('posicion')
+        oferta.descripcion = self.cleaned_data.get('descripcion')
+        oferta.carga_horaria = self.cleaned_data.get('carga_horaria')
+        oferta.profesion = self.cleaned_data.get('profesion')
+        oferta.save()
+        return oferta
+    
 class RegistroDesocupado(UserCreationForm):
     dni = forms.CharField(required=True)
     fecha_nacimiento = forms.DateField(required=True)
@@ -126,14 +145,5 @@ class ModificarEmpresa(forms.ModelForm):
 
         return user
 
-class RegistroOferta(forms.Form):
-    tipo_de_trabajo = forms.CharField(max_length=50)
-    publicacion = forms.CharField(widget=forms.Textarea, max_length=700, required=False)
-    fecha_publicacion = forms.DateField()
-
-    class Meta:
-        model = OfertaLaboral
-
-    
 class BorrarCuenta(forms.Form):
     estas_seguro = forms.BooleanField()

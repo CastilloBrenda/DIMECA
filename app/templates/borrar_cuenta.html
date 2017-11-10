@@ -1,29 +1,41 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<h1>Borrar cuenta</h1>
-<p>
+  <head>
+       <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
 
-{{ user.get_full_name }}
-{% if form.errors %}
-    {% for field in form %}
-        {% for error in field.errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
-    {% endfor %}
-    {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
+  <div class="container">
+    <div class="login-container">
+              <div id="output"></div>
+              <div class="form-box">
+  {% if form.errors %}
+    <p style="color: red">Your username and password didn't match. Please try again.</p>
+  {% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" />
+        {% for field in form %}
+        <div class="form-group has-errors text-danger small">
+            {{ field.label_tag }}<br>
+            {{ field }}<br>
         </div>
-    {% endfor %}
-{% endif %}
+            {% for error in field.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            {% if field.help_text %}
+              <p><small style="color: grey">{{ field.help_text }}</small></p>
+            {% endif %}
+          </p>
+        {% endfor %}
+        <button class="btn btn-info btn-block login" type="submit">Borrar cuenta</button>
+        <p><p>
+    </div>
+    </form>
 
-<form method="POST" class="post-form">
-    {{ csrf_token }}
-    {{ form.as_p() }}
-    <button type="submit" class="save btn btn-default">Ingresar</button>
-</form>
-<p><p>
+  </div>
+</div>
+
+</div>
 {% endblock %}
