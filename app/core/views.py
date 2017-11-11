@@ -116,33 +116,33 @@ def handle_borrar_cuenta_form(request):
         return redirect('home')
     else:
         return render(request, 'borrar_cuenta.html', {'form': form})
-
+@login_required
 def modificar_desocupado(request):
     args = {}
-
+    user = User.objects.get(id=request.user.id)
     if request.method == 'POST':
         form = ModificarDesocupado(request.POST, instance=request.user)
         form.actual_user = request.user
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('home'))
+            return redirect('home')
     else:
-        form = ModificarDesocupado()
+        form = ModificarDesocupado(instance=user.desocupado)
 
     args['form'] = form
-    return render(request, 'modificar_cuenta.html', args)
-
+    return render(request, 'modificar_desocupados.html', args)
+@login_required
 def modificar_empresa(request):
     args = {}
-
+    user = User.objects.get(id=request.user.id)
     if request.method == 'POST':
-        form = ModificarEmpresa(request.POST, instance=request.user)
+        form = ModificarEmpresa(request.POST, instance=user.empresa)
         form.actual_user = request.user
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('home'))
+            return redirect('home')
     else:
-        form = ModificarEmpresa()
+        form = ModificarEmpresa(instance=user.empresa)
 
     args['form'] = form
-    return render(request, 'modificar_cuenta.html', args)
+    return render(request, 'modificar_empresas.html', args)

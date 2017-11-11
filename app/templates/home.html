@@ -5,10 +5,17 @@
   <p>Sos un: {{ user.profile_type }}</p>
   <p>Algunos datos relevantes son:</p>
   {% if user.is_empresa %}
+    <p>Nombre de usuario: {{user.profile.user}}</p>
     <p>CUIT: {{ user.profile.cuit }}</p>
+    <p>Rubro: {{user.profile.rubro}}</p>
+	<p>Razon Social: {{user.profile.razon_social}}</p>
   {% endif %}
   {% if user.is_desocupado %}
+	<p>Nombre de usuario: {{user.profile.nombre}}</p>
     <p>DNI: {{ user.profile.dni }}</p>
+	<p>Trabajo realizable: {{user.profile.trabajo_realizable}}</p>
+	<p>Formacion: {{ user.profile.formacion }}</p>}
+	<p>Habilidades: {{ user.profile.habilidades }}</p>
   {% endif %}
   {% url 'modificar_desocupado' as mod_des %}
   {% url 'modificar_empresa' as mod_emp %}

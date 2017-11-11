@@ -29,4 +29,8 @@ urlpatterns = [
     url(r'^modificar_desocupado', core_views.modificar_desocupado, name='modificar_desocupado'),
     url(r'^modificar_empresa', core_views.modificar_empresa, name='modificar_empresa'),
     url(r'^ofertas', core_views.ofertas, name='ofertas'),
+    url(r'^empresa/editar$', core_views.modificar_empresa, name='modificar_empresa'),
+    url(r'^desocupado/editar$', core_views.modificar_desocupado, name='modificar_desocupado'),
+    url(r'^empresa/editar$', core_views.modificar_empresa, name='modificar_empresa'),
 ]
+
