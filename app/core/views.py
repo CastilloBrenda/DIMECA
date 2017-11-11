@@ -121,7 +121,7 @@ def modificar_desocupado(request):
     args = {}
     user = User.objects.get(id=request.user.id)
     if request.method == 'POST':
-        form = ModificarDesocupado(request.POST, instance=request.user)
+        form = ModificarDesocupado(request.POST, instance=user.desocupado)
         form.actual_user = request.user
         if form.is_valid():
             form.save()
@@ -130,7 +130,7 @@ def modificar_desocupado(request):
         form = ModificarDesocupado(instance=user.desocupado)
 
     args['form'] = form
-    return render(request, 'modificar_desocupados.html', args)
+    return render(request, 'modificar_desocupado.html', args)
 @login_required
 def modificar_empresa(request):
     args = {}
@@ -145,4 +145,4 @@ def modificar_empresa(request):
         form = ModificarEmpresa(instance=user.empresa)
 
     args['form'] = form
-    return render(request, 'modificar_empresas.html', args)
+    return render(request, 'modificar_empresa.html', args)
